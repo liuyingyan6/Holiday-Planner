@@ -2,11 +2,11 @@ CREATE DATABASE IF NOT EXISTS holiday_planner;
 USE holiday_planner;
 
 -- drop existing tables if they exist to clear out
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS plans;
-DROP TABLE IF EXISTS user_plans;
 DROP TABLE IF EXISTS packing_items;
 DROP TABLE IF EXISTS feedbacks;
+DROP TABLE IF EXISTS user_plans;
+DROP TABLE IF EXISTS plans;
+DROP TABLE IF EXISTS users;
 
 -- create tables
 CREATE TABLE users
@@ -21,7 +21,8 @@ CREATE TABLE users
 CREATE TABLE plans
 (
     id     INT AUTO_INCREMENT PRIMARY KEY,
-    `name` VARCHAR(50) NOT NULL
+    `name` VARCHAR(50) NOT NULL,
+    access_code VARCHAR(100) UNIQUE
 );
 
 CREATE TABLE user_plans
@@ -56,9 +57,9 @@ INSERT INTO users (first_name, last_name, email, phone_number)
 VALUES ('John', 'Doe', 'john.doe@example.com', '1234567890'),
        ('Jane', 'Smith', 'jane.smith@example.com', '0987654321');
 
-INSERT INTO plans (name)
-VALUES ('Vacation to Hawaii'),
-       ('Business Trip to New York');
+INSERT INTO plans (name, access_code)
+VALUES ('Vacation to Hawaii', CONCAT(1, '%', FLOOR(RAND() * 10000000))),
+       ('Business Trip to New York', CONCAT(2, '%', FLOOR(RAND() * 10000000)));
 
 INSERT INTO user_plans (user_id, plan_id)
 VALUES (1, 1),
