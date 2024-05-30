@@ -1,3 +1,4 @@
+DROP DATABASE holiday_planner;
 CREATE DATABASE IF NOT EXISTS holiday_planner;
 USE holiday_planner;
 
