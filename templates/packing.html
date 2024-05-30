@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Packing List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Packing List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Plan ID</th>
+                <th>User ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in packings %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.plan_id }}</td>
+                <td>{{ item.user_id }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
