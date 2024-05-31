@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itineraries for {{ plan.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+<h1>Itineraries for {{ plan.name }}</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Start Date & Time</th>
+        <th>End Date & Time</th>
+        <th>Created by User ID</th>
+        <th>Remarks</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for itinerary in itineraries %}
+        <tr>
+            <td>{{ itinerary.name }}</td>
+            <td>{{ itinerary.start_datetime }}</td>
+            <td>{{ itinerary.end_datetime }}</td>
+            <td>{{ itinerary.created_user_id }}</td>
+            <td>{{ itinerary.remark }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>

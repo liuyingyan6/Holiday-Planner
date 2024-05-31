@@ -4,42 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Packing List</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <h1>Packing List</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Item Name</th>
-                <th>Plan ID</th>
-                <th>User ID</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in packings %}
-            <tr>
-                <td>{{ item.name }}</td>
-                <td>{{ item.plan_id }}</td>
-                <td>{{ item.user_id }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<h1>Packing List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Item Name</th>
+        <th>User Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in packings %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ user_dict.get(item.user_id, 'None') }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<h2>Add New Item</h2>
+<form action="{{ url_for('packing.add_item', plan_id=plan_id) }}" method="POST">
+    <label for="name">Item Name:</label>
+    <input type="text" id="name" name="name" required>
+    <label for="user_id">User ID:</label>
+    <select id="user_id" name="user_id">
+        <option value="">None</option>
+        {% for user in users %}
+            <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Add Item</button>
+</form>
 </body>
 </html>
